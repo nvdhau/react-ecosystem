@@ -4,6 +4,7 @@ import './NewToDoForm.css';
 import { connect } from 'react-redux';
 // import { createToDo } from './actions';
 import { addToDoRequest } from './thunks';
+import { getToDos } from './selectors';
 
 // export both connected and unconnected versions
 // unconnected version for testing
@@ -41,7 +42,8 @@ export const NewToDoForm = ({ todos, onCreatePressed }) => {
 // may need 2 functions to pass to connect
 const mapStateToProps = state => ({ // the state is the entire Redux state
   // but only need "todos"
-  todos: state.todos, // => the new Component has "todos" as props
+  // todos: state.todos, // => the new Component has "todos" as props
+  todos: getToDos(state),
 });
 
 // trigger Redux action

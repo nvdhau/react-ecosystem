@@ -12,6 +12,8 @@ import {
 
 import { markAsDoneToDo } from './actions';
 
+import { getToDos, getToDosLoading } from './selectors';
+
 // think carefully before connecting,
 // because the connected component is less reusable
 // should not connect to Redux, if uses multiple places
@@ -51,8 +53,10 @@ export const ToDoList = ({
 // may need 2 functions to pass to connect
 const mapStateToProps = state => ({ // the state is the entire Redux state
   // but only need "todos"
-  todos: state.todos, // => the new Component has "todos" as props
-  isLoading: state.isLoading,
+  // todos: state.todos, // => the new Component has "todos" as props
+  // isLoading: state.isLoading,
+  todos: getToDos(state),
+  isLoading: getToDosLoading(state),
 });
 
 // trigger Redux action
