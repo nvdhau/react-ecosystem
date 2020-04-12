@@ -5,6 +5,7 @@ import {
   loadToDosInProgress, 
   loadToDosSuccess,
   createToDo,
+  removeToDo,
 } from './actions';
 
 export const displayAlert = (text) => () => {
@@ -19,12 +20,13 @@ export const loadToDos = () => async (dispatch, getState) => {
 
     dispatch(loadToDosSuccess(todos));
   }catch(err) {
+    console.log("Error in loadToDos");
     dispatch(loadToDosFailure());
     dispatch(displayAlert(err));
   }
 }
 
-export const addToDoRequest = (text) => async dispatch => {
+export const addToDoRequest = (text) => async (dispatch) => {
   try{
     const body = JSON.stringify({ text });
     const response = await fetch('http://localhost:8080/todos',
@@ -40,6 +42,23 @@ export const addToDoRequest = (text) => async dispatch => {
     const todo = await response.json();
     dispatch(createToDo(todo));
   }catch(err){
+    console.log("Error in addToDoRequest");
+    dispatch(displayAlert(err));
+  }
+}
+
+export const removeToDoRequest = (id) => async (dispatch) => {
+  try{
+    const response = await fetch(`http://localhost:8080/todos/${id}`,
+      {
+        method: 'delete',
+      }
+    );
+
+    const removedToDo = await response.json();
+    dispatch(removeToDo(removedToDo));
+  }catch(err){
+    console.log("Error in removeToDoRequest");
     dispatch(displayAlert(err));
   }
 }

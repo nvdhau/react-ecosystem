@@ -5,9 +5,9 @@ export const createToDo = todo => ({
 });
 
 export const REMOVE_TODO = 'REMOVE_TODO';
-export const removeToDo = text => ({
+export const removeToDo = (todo) => ({
     type: REMOVE_TODO,
-    payload: { text },
+    payload: { todo },
 });
 
 export const MARK_AS_DONE_TODO = 'MARK_AS_DONE_TODO';

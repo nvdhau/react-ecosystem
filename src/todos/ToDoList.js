@@ -4,10 +4,12 @@ import NewToDoForm from './NewToDoForm';
 import './ToDoList.css';
 // connect is higher order function
 import { connect } from 'react-redux';
-import { loadToDos } from './thunks';
+import { 
+  loadToDos,
+  removeToDoRequest,
+} from './thunks';
 
-import { removeToDo, markAsDoneToDo } from './actions';
-import { displayAlert } from './thunks';
+import { markAsDoneToDo } from './actions';
 
 // think carefully before connecting,
 // because the connected component is less reusable
@@ -54,9 +56,8 @@ const mapStateToProps = state => ({ // the state is the entire Redux state
 
 // trigger Redux action
 const mapDispatchToProps = dispatch => ({
-  onRemovePressed: (text) => dispatch(removeToDo(text)),
+  onRemovePressed: (id) => dispatch(removeToDoRequest(id)),
   onMarkAsDonePressed: (text) => dispatch(markAsDoneToDo(text)),
-  onDisplayAlertClicked: (text) => dispatch(displayAlert(text)),
   startLoadingToDos: () => dispatch(loadToDos()),
 });
  
