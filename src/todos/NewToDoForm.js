@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './NewToDoForm.css';
 // connect is higher order function
 import { connect } from 'react-redux';
-import { createToDo } from './actions';
+// import { createToDo } from './actions';
+import { addToDoRequest } from './thunks';
 
 // export both connected and unconnected versions
 // unconnected version for testing
@@ -45,7 +46,7 @@ const mapStateToProps = state => ({ // the state is the entire Redux state
 
 // trigger Redux action
 const mapDispatchToProps = dispatch => ({
-  onCreatePressed: (text) => dispatch(createToDo(text)),
+  onCreatePressed: (text) => dispatch(addToDoRequest(text)),
 });
 
 // connect()(COMPONENT) => return new version of the COMPONENT
