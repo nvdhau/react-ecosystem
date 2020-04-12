@@ -70,3 +70,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(ToDoList);
 
 // example pass only one
 // export default connect(null, mapDispatchToProps)(ToDoList);
+
+// use selector to change data structure of todos without edit component
+// change only 'reducers', 'store' and 'selectors'
+/*
+  from:
+    state.todos: [...]
+    state.isLoading: ...,
+
+  to:
+    state.todos: {
+      isLoading: ...,
+      data: [...]
+    }
+*/
