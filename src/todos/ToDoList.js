@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { 
   loadToDos,
   removeToDoRequest,
+  markAsDoneToDoRequest,
 } from './thunks';
 
 import { markAsDoneToDo } from './actions';
@@ -57,7 +58,7 @@ const mapStateToProps = state => ({ // the state is the entire Redux state
 // trigger Redux action
 const mapDispatchToProps = dispatch => ({
   onRemovePressed: (id) => dispatch(removeToDoRequest(id)),
-  onMarkAsDonePressed: (text) => dispatch(markAsDoneToDo(text)),
+  onMarkAsDonePressed: (id) => dispatch(markAsDoneToDoRequest(id)),
   startLoadingToDos: () => dispatch(loadToDos()),
 });
  

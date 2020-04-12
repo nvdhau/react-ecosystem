@@ -6,6 +6,7 @@ import {
   loadToDosSuccess,
   createToDo,
   removeToDo,
+  markAsDoneToDo,
 } from './actions';
 
 export const displayAlert = (text) => () => {
@@ -59,6 +60,22 @@ export const removeToDoRequest = (id) => async (dispatch) => {
     dispatch(removeToDo(removedToDo));
   }catch(err){
     console.log("Error in removeToDoRequest");
+    dispatch(displayAlert(err));
+  }
+}
+
+export const markAsDoneToDoRequest = (id) => async (dispatch) => {
+  try{
+    const response = await fetch(`http://localhost:8080/todos/${id}/completed`,
+      {
+        method: 'post',
+      }
+    );
+
+    const updatedToDo = await response.json();
+    dispatch(markAsDoneToDo(updatedToDo));
+  }catch(err){
+    console.log("Error in markAsDoneToDoRequest");
     dispatch(displayAlert(err));
   }
 }
