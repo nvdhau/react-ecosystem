@@ -1,5 +1,10 @@
-import { CREATE_TODO, REMOVE_TODO } from './actions';
+import { 
+  CREATE_TODO,
+  REMOVE_TODO,
+  MARK_AS_DONE_TODO,
+} from './actions';
 
+// No Redux actions or async operations in Redux reducers
 // when an action occurs, reducers is called
 // NOT MUTATE THE STATE
 // default state is []
@@ -19,6 +24,14 @@ export const todos = (state = [], action) => {
     case REMOVE_TODO: {
       const { text } = payload;
       return state.filter(todo => todo.text !== text);
+    }
+    case MARK_AS_DONE_TODO: {
+      const { text } = payload;
+      return state.map(todo => {
+        return (todo.text === text) 
+        ? { ...todo, isCompleted:true}
+        : todo ;
+      })
     }
     default:
       return state;

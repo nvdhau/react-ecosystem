@@ -4,7 +4,9 @@ import './NewToDoForm.css';
 import { connect } from 'react-redux';
 import { createToDo } from './actions';
 
-const NewToDoForm = ({ todos, onCreatePressed }) => {
+// export both connected and unconnected versions
+// unconnected version for testing
+export const NewToDoForm = ({ todos, onCreatePressed }) => {
 
   const [inputValue, setInputValue] = useState('');
 
@@ -48,4 +50,3 @@ const mapDispatchToProps = dispatch => ({
 
 // connect()(COMPONENT) => return new version of the COMPONENT
 export default connect(mapStateToProps, mapDispatchToProps)(NewToDoForm);
-// export default connect(mapStateToProps, mapDispatchToProps)(NewToDoForm);
