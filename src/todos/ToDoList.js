@@ -12,7 +12,12 @@ import {
 
 import { markAsDoneToDo } from './actions';
 
-import { getToDos, getToDosLoading } from './selectors';
+import { 
+  getToDos,
+  getToDosLoading,
+  getCompletedToDos,
+  getIncompleteToDos,
+} from './selectors';
 
 // think carefully before connecting,
 // because the connected component is less reusable
@@ -23,7 +28,8 @@ import { getToDos, getToDosLoading } from './selectors';
 
 //default values of todos is []
 export const ToDoList = ({ 
-  todos = [],
+  completedToDos,
+  incompleteToDos,
   isLoading,
   startLoadingToDos,
   onRemovePressed,
@@ -38,7 +44,17 @@ export const ToDoList = ({
   const content = 
     <div className="list-wrapper">
       <NewToDoForm />
-      { todos.map(todo =>
+      <h3>Incomplete:</h3>
+      { incompleteToDos.map(todo =>
+        <ToDoListItem 
+          todo={todo}
+          onRemovePressed={onRemovePressed}
+          onMarkAsDonePressed={onMarkAsDonePressed}
+        />
+      )}
+
+      <h3>Completed:</h3>
+      { completedToDos.map(todo =>
         <ToDoListItem 
           todo={todo}
           onRemovePressed={onRemovePressed}
@@ -55,7 +71,8 @@ const mapStateToProps = state => ({ // the state is the entire Redux state
   // but only need "todos"
   // todos: state.todos, // => the new Component has "todos" as props
   // isLoading: state.isLoading,
-  todos: getToDos(state),
+  completedToDos: getCompletedToDos(state),
+  incompleteToDos: getIncompleteToDos(state),
   isLoading: getToDosLoading(state),
 });
 
