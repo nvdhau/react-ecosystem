@@ -1,10 +1,39 @@
 import React, { useState } from 'react';
-import './NewToDoForm.css';
+import styled from 'styled-components';
 // connect is higher order function
 import { connect } from 'react-redux';
 // import { createToDo } from './actions';
 import { addToDoRequest } from './thunks';
 import { getToDos } from './selectors';
+
+const FormContainer = styled.div`
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 4px 8px grey;
+`;
+
+const NewToDoInput = styled.input`
+  font-size: 16px;
+  padding: 8px;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  border-radius: 8px;
+  width: 70%;
+  outline: none;
+`;
+
+const NewToDoButton = styled.button`
+  font-size: 16px;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  margin-left: 8px;
+  width: 20%;
+  background-color: #22ee22;
+`;
 
 // export both connected and unconnected versions
 // unconnected version for testing
@@ -13,16 +42,14 @@ export const NewToDoForm = ({ todos, onCreatePressed }) => {
   const [inputValue, setInputValue] = useState('');
 
   return ( 
-    <div className="new-todo-form">
-      <input 
-        className="new-todo-input" 
+    <FormContainer>
+      <NewToDoInput 
         type="text"
         placeholder="Type your new todo here"
         value={inputValue}
         onChange={e => setInputValue(e.target.value)}
       />
-      <button 
-        className="new-todo-button"
+      <NewToDoButton
         onClick={() => {
           const isDuplicatedText = 
             todos.some(todo => todo.text === inputValue);
@@ -34,8 +61,8 @@ export const NewToDoForm = ({ todos, onCreatePressed }) => {
         }}
       >
         Create Todo
-      </button>
-    </div>
+      </NewToDoButton>
+    </FormContainer>
   );
 }
 

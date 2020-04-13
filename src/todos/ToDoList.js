@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import ToDoListItem from './ToDoListItem';
 import NewToDoForm from './NewToDoForm';
-import './ToDoList.css';
 // connect is higher order function
 import { connect } from 'react-redux';
 import { 
@@ -18,6 +18,12 @@ import {
   getCompletedToDos,
   getIncompleteToDos,
 } from './selectors';
+
+// styled component
+const ListWrapper = styled.div`
+  max-width: 700px;
+  margin: auto;
+`;
 
 // think carefully before connecting,
 // because the connected component is less reusable
@@ -42,7 +48,7 @@ export const ToDoList = ({
 
   const loadingMessage = <div>Loading To Dos ...</div>;
   const content = 
-    <div className="list-wrapper">
+    <ListWrapper>
       <NewToDoForm />
       <h3>Incomplete:</h3>
       { incompleteToDos.map(todo =>
@@ -61,7 +67,7 @@ export const ToDoList = ({
           onMarkAsDonePressed={onMarkAsDonePressed}
         />
       )}
-    </div>;
+    </ListWrapper>;
 
   return isLoading ? loadingMessage : content;
 }
