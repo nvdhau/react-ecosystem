@@ -1,4 +1,4 @@
-import { 
+import {
   CREATE_TODO,
   REMOVE_TODO,
   MARK_AS_DONE_TODO,
@@ -28,10 +28,9 @@ const initialState = { isLoading: false, data: [] };
 // NOT MUTATE THE STATE
 // default state is []
 export const todos = (state = initialState, action) => {
-
   const { type, payload } = action;
 
-  switch(type) {
+  switch (type) {
     case CREATE_TODO: {
       const { todo } = payload;
       // return state.concat(todo);
@@ -52,20 +51,22 @@ export const todos = (state = initialState, action) => {
     case MARK_AS_DONE_TODO: {
       const { todo: updatedToDo } = payload;
       // return state.map(todo => {
-      //   return (todo.id === updatedToDo.id) 
+      //   return (todo.id === updatedToDo.id)
       //   // ? { ...todo, isCompleted:true}
       //   ? updatedToDo
       //   : todo ;
       return {
         ...state,
-        data: state.data.map(todo => {
-              return (todo.id === updatedToDo.id) 
-              ? updatedToDo
-              : todo ;
-            }),
+        data: state.data.map(
+          todo => (todo.id === updatedToDo.id
+            ? updatedToDo
+            : todo
+          ),
+        ),
       };
     }
     case LOAD_TODOS_SUCCESS: {
+      // eslint-disable-next-line no-shadow
       const { todos } = payload;
       return {
         ...state,
@@ -88,4 +89,4 @@ export const todos = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};

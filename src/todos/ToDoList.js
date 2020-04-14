@@ -1,19 +1,16 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import ToDoListItem from './ToDoListItem';
-import NewToDoForm from './NewToDoForm';
-// connect is higher order function
 import { connect } from 'react-redux';
-import { 
+import ToDoListItem from './ToDoListItem';
+import ReduxNewToDoForm from './NewToDoForm';
+// connect is higher order function
+import {
   loadToDos,
   removeToDoRequest,
   markAsDoneToDoRequest,
 } from './thunks';
 
-import { markAsDoneToDo } from './actions';
-
-import { 
-  getToDos,
+import {
   getToDosLoading,
   getCompletedToDos,
   getIncompleteToDos,
@@ -32,45 +29,45 @@ const ListWrapper = styled.div`
 // export both connected and unconnected versions
 // unconnected version for testing
 
-//default values of todos is []
-export const ToDoList = ({ 
+// default values of todos is []
+export const ToDoList = ({
   completedToDos,
   incompleteToDos,
   isLoading,
   startLoadingToDos,
   onRemovePressed,
-  onMarkAsDonePressed
+  onMarkAsDonePressed,
 }) => {
-
   useEffect(() => {
     startLoadingToDos();
-  }, [])
+  }, []);
 
   const loadingMessage = <div>Loading To Dos ...</div>;
-  const content = 
+  const content = (
     <ListWrapper>
-      <NewToDoForm />
+      <ReduxNewToDoForm />
       <h3>Incomplete:</h3>
-      { incompleteToDos.map(todo =>
-        <ToDoListItem 
+      { incompleteToDos.map(todo => (
+        <ToDoListItem
           todo={todo}
           onRemovePressed={onRemovePressed}
           onMarkAsDonePressed={onMarkAsDonePressed}
         />
-      )}
+      ))}
 
       <h3>Completed:</h3>
-      { completedToDos.map(todo =>
-        <ToDoListItem 
+      { completedToDos.map(todo => (
+        <ToDoListItem
           todo={todo}
           onRemovePressed={onRemovePressed}
           onMarkAsDonePressed={onMarkAsDonePressed}
         />
-      )}
-    </ListWrapper>;
+      ))}
+    </ListWrapper>
+  );
 
   return isLoading ? loadingMessage : content;
-}
+};
 
 // may need 2 functions to pass to connect
 const mapStateToProps = state => ({ // the state is the entire Redux state
@@ -88,8 +85,9 @@ const mapDispatchToProps = dispatch => ({
   onMarkAsDonePressed: (id) => dispatch(markAsDoneToDoRequest(id)),
   startLoadingToDos: () => dispatch(loadToDos()),
 });
- 
-export default connect(mapStateToProps, mapDispatchToProps)(ToDoList);
+
+const ReduxToDoList = connect(mapStateToProps, mapDispatchToProps)(ToDoList);
+export default ReduxToDoList;
 
 // example pass only one
 // export default connect(null, mapDispatchToProps)(ToDoList);

@@ -38,12 +38,11 @@ const NewToDoButton = styled.button`
 // export both connected and unconnected versions
 // unconnected version for testing
 export const NewToDoForm = ({ todos, onCreatePressed }) => {
-
   const [inputValue, setInputValue] = useState('');
 
-  return ( 
+  return (
     <FormContainer>
-      <NewToDoInput 
+      <NewToDoInput
         type="text"
         placeholder="Type your new todo here"
         value={inputValue}
@@ -51,10 +50,9 @@ export const NewToDoForm = ({ todos, onCreatePressed }) => {
       />
       <NewToDoButton
         onClick={() => {
-          const isDuplicatedText = 
-            todos.some(todo => todo.text === inputValue);
+          const isDuplicatedText = todos.some(todo => todo.text === inputValue);
 
-          if(!isDuplicatedText){
+          if (!isDuplicatedText) {
             onCreatePressed(inputValue);
             setInputValue('');
           }
@@ -64,7 +62,7 @@ export const NewToDoForm = ({ todos, onCreatePressed }) => {
       </NewToDoButton>
     </FormContainer>
   );
-}
+};
 
 // may need 2 functions to pass to connect
 const mapStateToProps = state => ({ // the state is the entire Redux state
@@ -79,4 +77,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 // connect()(COMPONENT) => return new version of the COMPONENT
-export default connect(mapStateToProps, mapDispatchToProps)(NewToDoForm);
+const ReduxNewToDoForm = connect(mapStateToProps, mapDispatchToProps)(NewToDoForm);
+export default ReduxNewToDoForm;

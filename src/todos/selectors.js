@@ -3,7 +3,7 @@
 
 import { createSelector } from 'reselect';
 
-//refactor selectors
+// refactor selectors
 export const getToDos = state => state.todos.data;
 export const getToDosLoading = state => state.todos.isLoading;
 

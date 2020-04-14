@@ -1,7 +1,7 @@
 import React from 'react';
 // import { hot } from 'react-hot-loader';
-import ToDoList from './todos/ToDoList';
 import styled from 'styled-components';
+import ReduxToDoList from './todos/ToDoList';
 
 const AppContainer = styled.div`
   margin: 1rem;
@@ -13,7 +13,7 @@ const AppContainer = styled.div`
 
 const App = () => (
   <AppContainer>
-    <ToDoList />
+    <ReduxToDoList />
   </AppContainer>
 );
 
