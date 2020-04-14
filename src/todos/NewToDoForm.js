@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // connect is higher order function
 import { connect } from 'react-redux';
@@ -75,6 +76,11 @@ const mapStateToProps = state => ({ // the state is the entire Redux state
 const mapDispatchToProps = dispatch => ({
   onCreatePressed: (text) => dispatch(addToDoRequest(text)),
 });
+
+NewToDoForm.propTypes = {
+  todos: PropTypes.array,
+  onCreatePressed: PropTypes.func,
+};
 
 // connect()(COMPONENT) => return new version of the COMPONENT
 const ReduxNewToDoForm = connect(mapStateToProps, mapDispatchToProps)(NewToDoForm);

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ToDoItemContainer = styled.div`
   background: #fff;
@@ -56,15 +57,16 @@ const ToDoListItem = ({ todo, onRemovePressed, onMarkAsDonePressed }) => {
         {(new Date(todo.createdAt)).toLocaleDateString()}
       </p>
       <ButtonContainer>
-        { todo.isCompleted
-          ? null
-          : (
-            <CompletedButton
-              onClick={() => onMarkAsDonePressed(todo.id)}
-            >
-              Mark as Done
-            </CompletedButton>
-          )
+        {
+          todo.isCompleted
+            ? null
+            : (
+              <CompletedButton
+                onClick={() => onMarkAsDonePressed(todo.id)}
+              >
+                Mark as Done
+              </CompletedButton>
+            )
         }
         <RemoveButton
           onClick={() => onRemovePressed(todo.id)}
@@ -74,6 +76,12 @@ const ToDoListItem = ({ todo, onRemovePressed, onMarkAsDonePressed }) => {
       </ButtonContainer>
     </Container>
   );
+};
+
+ToDoListItem.propTypes = {
+  todo: PropTypes.object,
+  onRemovePressed: PropTypes.func,
+  onMarkAsDonePressed: PropTypes.func,
 };
 
 export default ToDoListItem;

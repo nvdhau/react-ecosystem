@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import 'node-fetch';
 import fetchMock from 'fetch-mock';
 import { expect } from 'chai';
@@ -6,13 +7,12 @@ import { loadToDos } from '../thunks';
 
 describe('The loadToDos thunk', () => {
   it('Dispatched the correct actions in the success scenario', async () => {
-
     const fakeDispatch = sinon.spy();
-    
-    const fakeTodos = [{ 'text': '1' }, { 'text': '2' }];
+
+    const fakeTodos = [{ text: '1' }, { text: '2' }];
     fetchMock.get('http://localhost:8080/todos', fakeTodos);
 
-    const expectedFirstAction = {type: 'LOAD_TODOS_IN_PROGRESS'}
+    const expectedFirstAction = { type: 'LOAD_TODOS_IN_PROGRESS' };
     const expectedSecondAction = {
       type: 'LOAD_TODOS_SUCCESS',
       payload: {
@@ -26,6 +26,5 @@ describe('The loadToDos thunk', () => {
     expect(fakeDispatch.getCall(1).args[0]).to.deep.equal(expectedSecondAction);
 
     fetchMock.reset();
-
-  }); 
+  });
 });

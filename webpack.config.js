@@ -1,4 +1,5 @@
 const path = require('path');
+// eslint-disable-next-line no-unused-vars
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 

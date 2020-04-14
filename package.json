@@ -8,11 +8,11 @@
     "build": "npx webpack --mode development",
     "lint": "./node_modules/.bin/eslint ./src",
     "test": "mocha \"src/**/*.test.js\" --require @babel/register --recursive",
-    "precommit": "lint-staged"
+    "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.js":[
-      "yarn lint",
+    "*.js": [
+      "npm run lint",
       "prettier --write",
       "git add"
     ]
@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
