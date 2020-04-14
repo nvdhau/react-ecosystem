@@ -7,8 +7,12 @@
     "dev": "npx webpack-dev-server",
     "build": "npx webpack --mode development",
     "lint": "./node_modules/.bin/eslint ./src",
-    "test": "mocha \"src/**/*.test.js\" --require @babel/register --recursive",
-    "pre-commit": "lint-staged"
+    "test": "mocha \"src/**/*.test.js\" --require @babel/register --recursive"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.js": [
